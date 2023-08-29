@@ -31,5 +31,5 @@ jobs:
           GIMLET_TOKEN: ${{ secrets.GIMLET_TOKEN }}
         with:
           DEPLOY: "true"
-          ENV: "GIMLET-ENV"
-          APP: "GIMLET-APP"
+          ENV: "${{ vars.GIMLET_ENV }}"
+          APP: "${{ vars.GIMLET_APP }}"

@@ -17,3 +17,20 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+  gimlet:
+    needs: [artifacts]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+
+      - name: 🍍 Deploy with Gimlet
+        uses: gimlet-io/gimlet-artifact-shipper-action@v0.8.3
+        env:
+          GIMLET_SERVER: ${{ secrets.GIMLET_SERVER }}
+          GIMLET_TOKEN: ${{ secrets.GIMLET_TOKEN }}
+        with:
+          DEPLOY: "true"
+          ENV: "${{ vars.GIMLET_ENV }}"
+          APP: "${{ vars.GIMLET_APP }}"
